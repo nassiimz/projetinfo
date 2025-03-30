@@ -103,7 +103,7 @@
     </div>
 
     <footer>
-        <a href="paiement.php" class="validation">Valider et procéder au paiement</a>
+        <a href="recap.php" class="validation">Valider et procéder au paiement</a>
         <a href="aventure.php" class="btn">Retour</a>
 
     </footer>
