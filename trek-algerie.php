@@ -4,41 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trek dans le Sahara marocain</title>
-    <link rel="stylesheet" href="trek-tunisie.css">
+    <title>Trek à travers les dunes de sable algeriennes</title>
+    <link rel="stylesheet" href="trek-algerie.css">
 </head>
 
 <body>
 
-    <h1>Trek dans le Sahara marocain</h1>
+    <h1>Trek à travers les dunes de sable algériennes</h1>
 
 
     <section class="trek-image">
-        <img src="carte-trek-maroc.jpg" alt="Desert tunisien">
+        <img src="carte-trek-algerie.jpg" alt="Dunes du Sahara algérien">
     </section>
 
     <section class="description">
-        <p>Ce trek au cœur du Sahara marocain vous emmène à la découverte des paysages grandioses du désert, entre dunes majestueuses, oasis verdoyantes et montagnes arides du Djebel Bani, offrant une immersion totale dans la culture nomade et une expérience inoubliable sous les étoiles.</p>
+        <p>Partez à l'aventure dans le Sahara algérien, un désert majestueux aux paysages variés. Découvrez les dunes infinies, les formations rocheuses spectaculaires et les traditions nomades.</p>
     </section>
 
     <section class="programme">
         <h2>Programme du Trek</h2>
         <div class="programme-container">
             <div class="jour">
-                <img src="draa.jpg" alt="Départ vers le désert">
-                <p><u><strong>Jour 1 :</strong></u>Départ tôt le matin de Ouarzazate en passant par le col de Tizi’n-Tinififft (1680 m) avant de rejoindre la vallée du Drâa et ses palmeraies. Arrêt à Zagora pour découvrir son ambiance saharienne, puis continuation vers M’Hamid El Ghizlane, porte du désert, où commence l’immersion dans le Sahara marocain.</p>
+                <img src="djanet.jpeg" alt="Départ vers le désert">
+                <p><strong>Jour 1 :</strong> Arrivée à Djanet, rencontre avec l'équipe et départ vers le désert.</p>
             </div>
             <div class="jour">
-                <img src="bivouac.webp" alt="Tassili n'Ajjer">
-                <p><u><strong>Jour 2 :</strong></u> Départ à pied ou à dos de dromadaire pour traverser les premières dunes du désert en direction d’Erg Bourgueme. Continuation à travers les vastes étendues sablonneuses jusqu’à Erg Chegaga, l’un des plus grands massifs dunaires du Maroc, pour admirer un coucher de soleil spectaculaire. Nuit en bivouac sous les étoiles.</p>
+                <img src="tassili.jpg" alt="Tassili n'Ajjer">
+                <p><strong>Jour 2 :</strong> Randonnée dans le Tassili n'Ajjer, découverte des gravures rupestres.</p>
             </div>
             <div class="jour">
-                <img src="ergabidilya.jpg" alt="Dunes de l'Erg Admer">
-                <p><u><strong>Jour 3 :</strong></u> Randonnée matinale à travers le désert en direction d’Oued El Attach, un point d’eau essentiel pour la faune locale. Poursuite du trek vers Erg Abidiliya, un paysage de dunes infinies et de silence absolu, offrant une expérience immersive unique au cœur du Sahara.</p>
+                <img src="ergadmer.jpg" alt="Dunes de l'Erg Admer">
+                <p><strong>Jour 3 :</strong> Traversée des dunes de l'Erg Admer, nuit sous tente touareg.</p>
             </div>
             <div class="jour">
-                <img src="oasisaferdou.jpg" alt="Exploration des canyons">
-                <p><u><strong>Jour 4 :</strong></u> Dernière journée de trek avec une traversée du Djebel Bani, offrant un contraste saisissant entre le désert et la montagne. Arrivée à l’Oasis d’Aferdou, un havre de fraîcheur entouré de palmiers. Retour en véhicule vers Ouarzazate en passant par la vallée du Drâa, avec une dernière vue sur les paysages envoûtants du désert marocain.</p>
+                <img src="canyon.jpg" alt="Exploration des canyons">
+                <p><strong>Jour 4 :</strong> Exploration des canyons rocheux et retour à Djanet.</p>
             </div>
         </div>
     </section>
@@ -73,13 +73,12 @@
             <input type="date" id="date-depart" name="date-depart">
         </div>
 
-
     </section>
 
     <section class="billet-avion">
         <h2>Option Billet d'Avion</h2>
         <label>
-            <input type="radio" name="billet" value="avec_agence"> Prendre le billet avec l'agence (+300€)
+            <input type="radio" name="billet" value="avec_agence"> Prendre le billet avec l'agence (+800€)
         </label>
         <label>
             <input type="radio" name="billet" value="independant"> Acheter mon billet indépendamment
@@ -103,8 +102,8 @@
     </div>
 
     <footer>
-        <a href="recap-treck.php" class="validation">Valider et procéder au paiement</a>
-        <a href="aventure.php" class="btn">Retour</a>
+        <a href="paiement.html" class="validation">Valider et procéder au paiement</a>
+        <a href="aventure.html" class="btn">Retour</a>
 
     </footer>
 </body>

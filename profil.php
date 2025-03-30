@@ -26,18 +26,21 @@ $user = $_SESSION["user"];
     <div class="profile-container">
         <div class="profile-card">
             <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="avatar.jpg" alt="Avatar" class="avatar">
+                </div>
                 <div class="pseudo">
-                    <h2> <input value="<?php echo htmlspecialchars($user['prenom'] . ' ' . $user['nom']); ?>">
+                    <h2><?php echo htmlspecialchars($user['prenom'] . ' ' . $user['nom']); ?>
                         <i class="fa-solid fa-pen-to-square"></i>
                     </h2>
+                    <p class="status">Statut : Membre VIP</p>
                 </div>
-                <p class="status">Statut : Membre VIP</p>
             </div>
 
             <div class="profile-info">
                 <div class="email">
                     <p><strong>Email :</strong>
-                        <input type="text" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                        <input type="text" value="<?php echo htmlspecialchars($user['email']); ?>" readonly>
                         <i class="fa-solid fa-envelope"></i>
                     </p>
                 </div>

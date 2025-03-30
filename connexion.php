@@ -1,117 +1,132 @@
 <?php
-session_start();
+// Activer la gestion des erreurs
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-$error = "";
+require_once 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $password = $_POST['password'];
-    $csvFile = "data/utilisateurs.csv"; // Chemin corrigé
+    try {
+        $email = strtolower(trim($_POST['email']));
+        $password = $_POST['password'];
 
-    if (!file_exists($csvFile)) {
-        $error = "Erreur système. Veuillez réessayer plus tard.";
-    } else {
-        $handle = fopen($csvFile, "r");
-        if ($handle !== FALSE) {
-            $loggedIn = false;
-
-            // Passer la première ligne si c'est l'en-tête
-            $isFirstLine = true;
-
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                if ($isFirstLine) {
-                    $isFirstLine = false;
-                    continue;
-                }
-
-                if (count($data) >= 8) { // Vérification du nombre de colonnes
-                    $csv_email = trim($data[3]);
-                    $csv_password_hash = trim($data[4]);
-                    $csv_role = trim($data[7] ?? 'user'); // Avec valeur par défaut
-
-                    // Vérification sécurisée
-                    if ($csv_email === $email && password_verify($password, $csv_password_hash)) {
-                        $_SESSION["user"] = [
-                            "id" => trim($data[0]),
-                            "nom" => trim($data[1]),
-                            "prenom" => trim($data[2]),
-                            "email" => $csv_email,
-                            "role" => $csv_role
-                        ];
-                        $loggedIn = true;
-                        break;
-                    }
-                }
-            }
-            fclose($handle);
-
-            if ($loggedIn) {
-                // Redirection sécurisée
-                $redirect = ($_SESSION["user"]["role"] === "admin") ? "admin.php" : "acceuil1.php";
-                header("Location: " . $redirect);
-                exit();
-            } else {
-                $error = "Identifiants incorrects";
-            }
-        } else {
-            $error = "Erreur de lecture du fichier";
+        if (!file_exists(USER_CSV)) {
+            throw new Exception("Base utilisateurs non trouvée");
         }
+
+        $file = fopen(USER_CSV, 'r');
+        fgetcsv($file); // Ignorer l'en-tête
+
+        while (($data = fgetcsv($file)) !== FALSE) {
+            if (isset($data[3]) && strtolower(trim($data[3])) === $email) {
+                if (password_verify($password, $data[4])) {
+                    $_SESSION['user'] = [
+                        'id' => $data[0],
+                        'nom' => $data[1],
+                        'prenom' => $data[2],
+                        'email' => $data[3],
+                        'role' => $data[7]
+                    ];
+
+                    fclose($file);
+                    header("Location: profil.php");
+                    exit();
+                }
+            }
+        }
+        fclose($file);
+        throw new Exception("Identifiants incorrects");
+    } catch (Exception $e) {
+        $error = $e->getMessage();
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="connexion.css?v=<?php echo time(); ?>">
-    <title>Connexion | Click-journeY</title>
+    <title>Connexion</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            color: #dc3545;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #E8871E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #c76b15;
+        }
+
+        .register-link {
+            margin-top: 15px;
+            display: block;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
     <div class="login-container">
-        <div class="login-header">
-            <h1>Connexion</h1>
+        <h2>Connexion</h2>
+        <?php if (!empty($error)) echo "<div class='error'>$error</div>"; ?>
 
-            <?php if (!empty($error)): ?>
-                <div class="alert error">
-                    <?php echo htmlspecialchars($error); ?>
-                </div>
-            <?php endif; ?>
-        </div>
-
-        <form method="POST" class="login-form">
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required
-                    value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
-            </div>
-
-            <div class="input-group">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <div class="options">
-                <label class="remember-me">
-                    <input type="checkbox" name="remember"> Se souvenir de moi
-                </label>
-                <a href="#" class="forgot-password">Mot de passe oublié ?</a>
-            </div>
-
-            <button type="submit" class="login-btn">Se connecter</button>
+        <form method="post">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
         </form>
-
-        <div class="register-link">
-            <p>Pas encore inscrit ? <a href="inscriptionV1.php">Créer un compte</a></p>
-        </div>
-    </div>
-
-    <div class="bottom-links">
-        <a href="acceuil1.php" class="home-link">Retour à l'accueil</a>
+        <p style="text-align: center; margin-top: 20px;">
+            Pas encore inscrit ? <a href="inscriptionV1.php" class="register-link">Créer un compte</a>
+        </p>
     </div>
 </body>
 

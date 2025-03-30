@@ -1,86 +1,123 @@
-body {
-    font-family: Arial, sans-serif;
+body,
+html {
     margin: 0;
     padding: 0;
-    background: url(fondaventure.webp) no-repeat center center/cover;
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #F5D29C;
     text-align: center;
 }
 
-.header {
-    padding: 20px 0;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #704214;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.6);
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+.titre-principal {
+    font-size: 2.8rem;
+    margin: 50px 0 30px;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .treks {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    padding: 120px 20px 40px;
+    gap: 30px;
+    padding: 20px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .trek-card {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     text-align: center;
-    width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none; 
-    color: #E8871E;
+    width: 280px;
+    transition: all 0.4s ease;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .trek-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
 }
-
 
 .trek-img {
     width: 100%;
+    height: 180px;
+    object-fit: cover;
     border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .flag-img {
     width: 30px;
-    height: auto;
-    margin-top: 10px;
+    height: 20px;
+    margin: 15px 0;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .titre-trek {
     font-size: 1.5rem;
     margin: 10px 0;
+    color: #fff;
+    font-weight: 500;
 }
 
 .trek-description {
-    font-size: 1rem;
-    color: #F5D29C;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 10px;
 }
-
-
 
 .btn1 {
     display: inline-block;
-    margin-top: 20px;
-    padding: 12px 20px;
-    font-size: 1rem;
-    color: white;
-    background: #8D6E63;
-    border-radius: 8px;
+    margin: 40px auto;
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    color: #fff;
+    background: rgba(232, 135, 30, 0.8);
+    border-radius: 30px;
     text-decoration: none;
-    transition: background 0.3s;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
 }
 
 .btn1:hover {
-    background: #6D4C41;
+    background: rgba(232, 135, 30, 0.9);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
+@media (max-width: 768px) {
+    .titre-principal {
+        font-size: 2rem;
+        margin: 30px 0;
+        padding: 15px;
+    }
 
+    .treks {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .trek-card {
+        width: 90%;
+        max-width: 350px;
+    }
+}
